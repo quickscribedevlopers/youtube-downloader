@@ -1,6 +1,13 @@
 const { exec } = require("child_process");
+const express = require("express");
+const cors = require("cors");
 
-export default function handler(req, res) {
+const app = express();
+app.use(cors()); // ✅ Enable CORS for all requests
+
+const PORT = process.env.PORT || 3000;
+
+app.get("/getVideo", (req, res) => {
   const videoUrl = req.query.url;
 
   if (!videoUrl) {
@@ -14,6 +21,11 @@ export default function handler(req, res) {
       return res.status(500).json({ error: "Failed to fetch download link" });
     }
 
+    res.setHeader("Access-Control-Allow-Origin", "*");  // ✅ Fix CORS issue
     res.json({ downloadUrl: stdout.trim() });
   });
-}
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
