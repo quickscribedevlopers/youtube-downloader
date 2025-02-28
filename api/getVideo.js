@@ -1,13 +1,6 @@
 const { exec } = require("child_process");
-const express = require("express");
-const cors = require("cors");
 
-const app = express();
-app.use(cors());
-const PORT = process.env.PORT || 3000;
-
-// API to get the best YouTube video download link
-app.get("/getVideo", (req, res) => {
+export default function handler(req, res) {
   const videoUrl = req.query.url;
 
   if (!videoUrl) {
@@ -23,9 +16,4 @@ app.get("/getVideo", (req, res) => {
 
     res.json({ downloadUrl: stdout.trim() });
   });
-});
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+}
