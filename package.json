@@ -1,0 +1,12 @@
+{
+  "name": "youtube-downloader",
+  "version": "1.0.0",
+  "description": "YouTube Video Downloader API",
+  "main": "api/getVideo.js",
+  "scripts": {
+    "start": "node api/getVideo.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
